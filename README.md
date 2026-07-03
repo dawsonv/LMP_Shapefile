@@ -1,50 +1,39 @@
 # LMP_Shapefile
 
-A tool to create a shapefile and CSV file of Locational Marginal Pricing (LMP) Nodes in CAISO and most of the Western Electricity Coordinating Council (WECC). 
+A simple tool to create a shapefile and CSV file of Locational Marginal Pricing (LMP) Nodes in CAISO and the Western Energy Imbalance Market (WEIM).
 
 The data is fetched from the CAISO interactive price contour map API:
 `http://wwwmobile.caiso.com/Web.Service.Chart/api/v3/ChartService/PriceContourMap1`
 
+![A map of LMPs in CAISO and WEIM](map.png)
+
 ## Repository Structure
 
 - `CAISO_LMP.py`: The python script to fetch the coordinates and generate the outputs.
-- `LMP/`: Folder containing the generated shapefile components (`caiso_lmp.shp`, `caiso_lmp.shx`, `caiso_lmp.dbf`, `caiso_lmp.prj`).
+- `LMP/`: Folder containing the generated shapefile components (`caiso_lmp.shp`, `caiso_lmp.shx`, `caiso_lmp.dbf`, `caiso_lmp.prj`, `caiso_lmp.cpg`).
 - `LMP_coordinates.csv`: CSV containing coordinates, balancing area, node ID, and node type.
 - `pyproject.toml` / `uv.lock`: Project and dependency configuration files for `uv`.
 
 ## Prerequisites & Installation
 
-This project is managed using [uv](https://github.com/astral-sh/uv), a fast Python package manager.
+This project is managed using [uv](https://github.com/astral-sh/uv). You can set up the project environment and install dependencies by following these steps:
 
 1. Install `uv` if you haven't already:
    ```bash
    # On macOS/Linux
    curl -LsSf https://astral.sh/uv/install.sh | sh
    ```
-2. Check out the project and navigate to the project directory. `uv` will automatically manage the environment and install dependencies when you run the script.
+2. Navigate to the project directory. `uv` will automatically manage the environment and install dependencies when you run the script.
 
 ## Usage
 
-Run the script using `uv run`:
+Simply run the script using `uv run`:
 
 ```bash
-uv run CAISO_LMP.py [options]
+uv run CAISO_LMP.py
 ```
 
-### CLI Arguments
-
-- `-o`, `--output-csv` `PATH`: Path to output the CSV file (default: `LMP_coordinates.csv`).
-- `-s`, `--output-shp` `PATH`: Path to output the shapefile (default: `LMP/caiso_lmp.shp`).
-- `--no-csv`: Disable CSV generation.
-- `--no-shp`: Disable Shapefile generation.
-- `--url` `URL`: Provide a custom CAISO API endpoint URL.
-- `-v`, `--verbose`: Enable detailed DEBUG-level logging.
-
-Example:
-```bash
-# Fetch and write both CSV and Shapefile with verbose logs
-uv run CAISO_LMP.py --verbose
-```
+This will fetch the data from the CAISO API and overwrite the `LMP_coordinates.csv` and the shapefile in the `LMP/` folder.
 
 ---
 
